@@ -16,8 +16,6 @@ const fileService = () => {
   console.log("Add new model \n");
   console.log(`
     [1] Prisma Name \n
-    [2] Mongo Name | Deleted \n
-    [3] MySql Name | Deleted \n
   `);
 
   input.on("line", (line) => {

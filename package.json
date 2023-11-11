@@ -9,6 +9,7 @@
     "start": "ts-node ./dist/main.js",
     "build": "tsc --build",
     "dev": "nodemon ./main.ts",
+    "prisma": "npx prisma db push",
     "file": "ts-node ./utils/services/fileService.ts"
   },
   "dependencies": {

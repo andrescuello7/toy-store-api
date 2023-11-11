@@ -18,5 +18,4 @@ if (typeof window === "undefined") {
   }
 }
 
-/* @ts-ignore */
 export default prisma;
