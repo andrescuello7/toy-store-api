@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 
 export class App {
   private app = express();
-  private port: number = 3000;
+  private port: number = 4000;
 
   settings() {
     this.app.set("port", process.env.PORT || this.port);
