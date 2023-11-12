@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
+import { sign } from "jsonwebtoken";
 import { IRequest } from "src/interface";
 import prisma from "../../config/prisma";
 import { GENERAL_ERROR } from "../constants";
 import { cryptoEncode, isExistingUser } from "../utils";
-import { sign } from "jsonwebtoken";
 
 export async function getUser(req: Request, res: Response) {
   try {
@@ -17,16 +17,39 @@ export async function getUser(req: Request, res: Response) {
 }
 
 export async function postUsers(req: IRequest, res: Response) {
+  const { password: pwd } = req.body
+
   try {
     if (await isExistingUser(req.body.email)) {
       throw new Error(GENERAL_ERROR);
     }
+
+    const hashPwd = await cryptoEncode(pwd);
+
+    const bodyWithHashPwd = {...req.body, password: hashPwd}
+
     const user = await prisma.user.create({
-      data: req.body,
+      data: bodyWithHashPwd,
     });
-    res.status(200).send({ user: user });
+
+    const resultJwt = await sign({
+      sub: {
+        userId: user?.id
+      },
+    }, process.env?.SECRET!, {expiresIn: "3600"});
+
+    const filteredUser = await prisma.user.findFirstOrThrow({
+      select: {
+        email: true,
+        fullName: true,
+        createdAt: true,
+      }
+    })
+
+    const createdUser = {...filteredUser, token: resultJwt}
+
+    res.status(200).send({ user: createdUser });
   } catch (error: any) {
-    console.log(error)
     res.status(400).send({ error: error.message ? error.message : GENERAL_ERROR });
   }
 }
