@@ -17,8 +17,8 @@ export async function getUser(req: Request, res: Response) {
 }
 
 export async function postUsers(req: IRequest, res: Response) {
-
   const { password: pwd } = req.body
+
   try {
     if (await isExistingUser(req.body.email)) {
       throw new Error(GENERAL_ERROR);
