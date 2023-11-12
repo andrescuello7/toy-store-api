@@ -1,6 +1,4 @@
-// import prisma from "../../config/prisma";
-
-import { OpenAI } from "../../utils/openAI/index";
+import { OpenAI } from "../utils/openAI/index";
 import { Request, Response } from "express";
 
 export async function postProducts(req: Request, res: Response) {
