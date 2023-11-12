@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { GENERAL_ERROR } from "src/constants";
+import { GENERAL_ERROR } from "../../src/constants";
 import { createOrder } from "../../src/utils/mercadoPago";
 
 export async function postPayments(req: Request, res: Response) {
