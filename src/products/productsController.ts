@@ -30,8 +30,12 @@ export async function getDescriptionProduct(req: Request, res: Response) {
 };
 
 export async function getAllProducts(req: Request,res: Response) {
+  const { page = 1, perPage = 20 }: any = req.query
   try {
-    const products = await prisma.product.findMany();
+    const products = await prisma.product.findMany({
+      skip: (page - 1 ) * perPage,
+      take: perPage
+    });
     res.status(200).send({products: products});
   } catch (error) {
     res.status(400).send({error: GENERAL_ERROR});
