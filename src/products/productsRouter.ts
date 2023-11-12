@@ -5,7 +5,7 @@ import { getAllProducts, getDescriptionProduct, postProduct } from "./productsCo
 const router: Router = Router();
 
 router.post("/",auth, postProduct);
-router.get("/", getDescriptionProduct);
-router.post("/getProducts", getAllProducts);
+router.post("/description", getDescriptionProduct);
+router.get("/getProducts", getAllProducts);
 
 export default router;
