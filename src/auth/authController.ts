@@ -1,9 +1,25 @@
 import prisma from "../../config/prisma";
 
+import { GENERAL_ERROR } from "../../src/constants";
+import { sign } from "jsonwebtoken";
+
 import { Request, Response } from "express";
+import { IRequest } from "../../src/interface";
 import { cryptoDecode } from "../utils";
 
-import { sign } from "jsonwebtoken";
+
+export async function getAuth(req: IRequest, res: Response) {
+  try {
+    const userId = req.userId;
+    
+    const response = await prisma.user.findFirstOrThrow({
+      where: { id: userId }
+    })
+    res.status(200).send({ users: response });
+  } catch (error: any) {
+    res.status(400).send({ error: GENERAL_ERROR });
+  }
+}
 
 export async function postAuth(req: Request, res: Response) {
   const { email, password } = req.body;
@@ -31,7 +47,7 @@ export async function postAuth(req: Request, res: Response) {
       sub: {
         userId: user?.id
       },
-    }, process.env.SECRET!, { expiresIn: '3600' });
+    }, process.env.SECRET!, { expiresIn: '2h' });
     res.status(200).send({ token: result });
   } catch (error: any) {
     res.status(400).send({ error: error.message });

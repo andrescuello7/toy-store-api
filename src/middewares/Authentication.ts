@@ -9,10 +9,11 @@ export const auth = async (req: IRequest, res: Response, next: NextFunction) => 
     }
     try {
         const token = authorization.replace("Bearer ", "");
-        const result: { userId: string } = verify(token, process.env.SECRET!) as { userId: string };
-        req.userId = result.userId;
+        const { sub }: any = await verify(token, process.env.SECRET!);
+        req.userId = sub.userId;
         next()
     } catch (error) {
+        console.log(error);
         res.status(401).send("Error authenticating")
     }
 }
