@@ -6,6 +6,6 @@ const router: Router = Router();
 
 router.post("/",auth, postProduct);
 router.get("/", getDescriptionProduct);
-router.get("/getProducts", getAllProducts);
+router.post("/getProducts", getAllProducts);
 
 export default router;
