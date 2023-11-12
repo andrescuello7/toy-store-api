@@ -1,10 +1,9 @@
 import { Router } from "express";
-import { postAuth, getAuth } from "./authController";
+import { postPayments } from "./paymentsController";
 import { auth } from "../../src/middewares/Authentication";
 
 const router: Router = Router();
 
-router.get("/", auth, getAuth);
-router.post("/", postAuth);
+router.post("/", auth, postPayments);
 
 export default router;
