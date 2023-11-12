@@ -13,7 +13,6 @@ export const auth = async (req: IRequest, res: Response, next: NextFunction) => 
         req.userId = sub.userId;
         next()
     } catch (error) {
-        console.log(error);
         res.status(401).send("Error authenticating")
     }
 }
