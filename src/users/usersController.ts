@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { IRequest } from "src/interface";
 import prisma from "../../config/prisma";
 
 export async function getUser(req: Request, res: Response) {
@@ -12,7 +13,7 @@ export async function getUser(req: Request, res: Response) {
   }
 }
 
-export async function postUsers(req: Request, res: Response) {
+export async function postUsers(req: IRequest, res: Response) {
   try {
     const response = await prisma.user.create({
       data: req.body,
