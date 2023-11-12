@@ -1,7 +1,7 @@
 import prisma from "../../config/prisma";
 
 import { sign } from "jsonwebtoken";
-import { GENERAL_ERROR } from "../../src/constants";
+import { GENERAL_ERROR } from "../../src/constants/index";
 
 import { Request, Response } from "express";
 import { IRequest } from "../../src/interface";
