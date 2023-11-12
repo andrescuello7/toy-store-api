@@ -1,7 +1,7 @@
 import prisma from "../../config/prisma";
 
 import { Request, Response } from "express";
-import { cryptoDecode } from "../../utils/crypto/hash";
+import { cryptoDecode } from "../utils";
 
 import { sign } from "jsonwebtoken";
 
@@ -17,13 +17,13 @@ export async function postAuth(req: Request, res: Response) {
       where: { email: email }
     })
     if (!email || !password) {
-      throw new Error("Email invalid");
+      throw new Error("Email o usuario inválido.");
     }
 
     //Decode the password
     const passDecode = await cryptoDecode(password, user?.password!);
     if (!passDecode) {
-      throw new Error("Password incorrect");
+      throw new Error("Email o usuario inválido.");
     }
 
     // Implement Jwt Authentication
