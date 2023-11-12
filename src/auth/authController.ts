@@ -16,7 +16,7 @@ export async function postAuth(req: Request, res: Response) {
     const user = await prisma.user.findFirst({
       where: { email: email }
     })
-    if (!email || !password) {
+    if (!user!.email || !user!.password) {
       throw new Error("Email o usuario inválido.");
     }
 
