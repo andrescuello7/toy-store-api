@@ -1,0 +1,1 @@
+export const GENERAL_ERROR: string = "Ha ocurrido un error en la aplicación. Verifica la información ingresada e intenta nuevamente.";
