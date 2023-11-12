@@ -1,9 +1,11 @@
-import prisma from "../../config/prisma";
 import { Request, Response } from "express";
+import prisma from "../../config/prisma";
 
-export async function getUsers(req: Request, res: Response) {
+export async function getUser(req: Request, res: Response) {
   try {
-    const response = await prisma.user.findMany();
+    const response = await prisma.user.findUnique({
+      where: {email: req.body}
+    })
     res.status(200).send({ users: response });
   } catch (error: any) {
     res.status(400).send({ error: "error GET" });
