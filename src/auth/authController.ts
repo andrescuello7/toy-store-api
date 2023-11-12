@@ -32,7 +32,7 @@ export async function postAuth(req: Request, res: Response) {
         userId: user?.id
       },
     }, process.env.SECRET!, { expiresIn: '3600' });
-    res.status(200).send({ auth: result });
+    res.status(200).send({ token: result });
   } catch (error: any) {
     res.status(400).send({ error: error.message });
   }
