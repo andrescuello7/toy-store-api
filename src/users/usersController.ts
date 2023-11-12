@@ -38,11 +38,14 @@ export async function postUsers(req: IRequest, res: Response) {
       },
     }, process.env?.SECRET!, {expiresIn: "3600"});
 
-    const filteredUser = await prisma.user.findFirstOrThrow({
+    const filteredUser = await prisma.user.findFirst({
       select: {
         email: true,
         fullName: true,
         createdAt: true,
+      },
+      where: {
+        id: user?.id
       }
     })
 
