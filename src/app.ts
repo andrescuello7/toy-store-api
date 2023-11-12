@@ -1,5 +1,6 @@
 import express from "express";
 import UsersRouter from "./users/usersRouter";
+import AuthRouter from "./auth/authRouter";
 import bodyParser from "body-parser";
 
 export class App {
@@ -15,6 +16,7 @@ export class App {
 
   routes() {
     this.app.use("/api/users", UsersRouter);
+    this.app.use("/api/auth", AuthRouter);
   }
 
   listen() {
