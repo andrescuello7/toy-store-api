@@ -1,7 +1,7 @@
 import prisma from "../../config/prisma";
 
-import { GENERAL_ERROR } from "../../src/constants";
 import { sign } from "jsonwebtoken";
+import { GENERAL_ERROR } from "../../src/constants";
 
 import { Request, Response } from "express";
 import { IRequest } from "../../src/interface";
@@ -13,8 +13,14 @@ export async function getAuth(req: IRequest, res: Response) {
     const userId = req.userId;
     
     const response = await prisma.user.findFirstOrThrow({
-      where: { id: userId }
+      where: { id: userId },
+      select: {
+        id: true,
+        email: true,
+        fullName: true,
+      }
     })
+    console.log(response)
     res.status(200).send({ users: response });
   } catch (error: any) {
     res.status(400).send({ error: GENERAL_ERROR });

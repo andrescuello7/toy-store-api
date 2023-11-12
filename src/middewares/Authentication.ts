@@ -1,4 +1,4 @@
-import { Response, NextFunction } from "express";
+import { NextFunction, Response } from "express";
 import { verify } from "jsonwebtoken";
 import { IRequest } from "src/interface";
 
