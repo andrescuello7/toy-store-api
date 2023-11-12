@@ -22,7 +22,6 @@ export async function getDescriptionProduct(req: Request, res: Response) {
   const message = `Brindame una descripción del producto ${title} que tenga como máximo 80 caracteres.`;
   try {
     const getProductDescription = await OpenAI(message);
-    console.log(getProductDescription);
     res.status(200).send({description: getProductDescription});
   } catch (error) {
     res.status(400).send({error: GENERAL_ERROR});
