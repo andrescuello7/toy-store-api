@@ -12,7 +12,7 @@ export async function getUser(req: Request, res: Response) {
     res.status(200).send({ users: response });
     console.log(response)
   } catch (error: any) {
-    res.status(400).send({ error: "error GET" });
+    res.status(400).send({ error: GENERAL_ERROR });
   }
 }
 
@@ -27,7 +27,7 @@ export async function postUsers(req: IRequest, res: Response) {
     res.status(200).send({ users: response });
   } catch (error: any) {
     console.log(error)
-    res.status(400).send({ error: error.message ? error.message : "Error POST" });
+    res.status(400).send({ error: error.message ? error.message : GENERAL_ERROR });
   }
 }
 export async function putUsers(req: Request, res: Response) {
@@ -39,7 +39,7 @@ export async function putUsers(req: Request, res: Response) {
     });
     res.status(200).send({ users: response });
   } catch (error: any) {
-    res.status(400).send({ error: "error PUT" });
+    res.status(400).send({ error: GENERAL_ERROR });
   }
 }
 
@@ -51,6 +51,6 @@ export async function deleteUsers(req: Request, res: Response) {
     });
     res.status(200).send({ users: response });
   } catch (error: any) {
-    res.status(400).send({ error: "error DELETE" });
+    res.status(400).send({ error: GENERAL_ERROR });
   }
 }
